@@ -1,7 +1,12 @@
 #!/usr/bin/with-contenv bash
+
+ADDPARAM="-Dupnp.config.address=$SERVERIP -Dserver.port=$SERVERPORT"
+echo -e "Parameters used:\UPNP IP : $SERVERIP\nServer Port : $SERVERPORT"
+
 exec \
 	s6-setuidgid abc java \
 	-jar \
+	$ADDPARAM \
 	-Dconfig.file=/config/ha-bridge.config \
 	-Dexec.garden=/config/scripts \
 	-Dsecurity.key="$SEC_KEY" \
